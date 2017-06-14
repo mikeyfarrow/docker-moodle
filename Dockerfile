@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.10
 MAINTAINER Sergio Gómez <sergio@quaip.com>
 
 # Keep upstart from complaining
@@ -15,11 +15,20 @@ RUN apt-get -y upgrade
 RUN apt-get -y install mysql-server mysql-client pwgen python-setuptools curl git unzip
 
 # Moodle Requirements
-RUN apt-get -y install apache2 php5 php5-gd libapache2-mod-php5 postfix wget supervisor php5-pgsql vim curl libcurl3 libcurl3-dev php5-curl php5-xmlrpc php5-intl php5-mysql
+RUN apt-get -y install apache2 postfix wget supervisor vim curl libcurl3 libcurl3-dev
+RUN apt-get -y install php php-mysql php-xml php-curl php-zip php-gd php-xmlrpc php-soap php-mbstring php-intl
 
 # SSH
 RUN apt-get -y install openssh-server
 RUN mkdir -p /var/run/sshd
+
+# apache required dirs
+RUN mkdir -p /var/run/apache2
+RUN mkdir -p /var/lock/apache2
+
+# mysql required dirs
+RUN mkdir -p /var/run/mysqld
+RUN chown mysql /var/run/mysqld
 
 # mysql config
 RUN sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
