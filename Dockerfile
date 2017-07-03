@@ -10,7 +10,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update
 RUN apt-get -y upgrade
- 
+
 # Basic Requirements
 RUN apt-get -y install mysql-server mysql-client pwgen python-setuptools curl git unzip
 
