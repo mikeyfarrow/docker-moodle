@@ -1,3 +1,5 @@
+# test build on dockerhub
+
 FROM ubuntu:16.10
 MAINTAINER Sergio Gómez <sergio@quaip.com>
 
